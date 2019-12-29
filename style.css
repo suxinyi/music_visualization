@@ -1,0 +1,285 @@
+
+
+:root {
+    --orange: hsla(32, 100%, 50%, 1);
+    --yellow: hsla(49, 99%, 50%, 1);
+    --lime: hsla(82, 90%, 45%, 1);
+    --green: hsla(127, 81%, 41%, 1);
+    --red: hsla(342, 93%, 53%, 1);
+    --pink: hsla(314, 85%, 45%, 1);
+    --blue: hsla(211, 92%, 52%, 1);
+    --purple: hsla(283, 92%, 44%, 1);
+    --cyan: hsla(195, 98%, 55%, 1);
+    --white: hsla(0, 0%, 95%, 1);
+    --black: hsla(0, 0%, 10%, 1);
+
+    /* abstract our colours */
+    --boxMain: var(--white);
+    --boxSecond: var(--black);
+    --boxThird: var(--pink);
+    --boxHigh: var(--white);
+
+    --border: 1vmin solid var(--black);
+    --borderRad: 2px;
+
+
+}
+* {box-sizing: border-box;}
+body {
+    background-color: var(--white);
+    padding: 4vmax;
+    font-family: system-ui; color: var(--black);
+}
+
+#boombox {
+    width: 82vw; max-width: 800px; margin: 0px auto;
+}
+@media screen and (max-width: 570px) {
+    #boombox {max-width: 600px;}
+}
+
+
+.boombox-body {
+    /*gradient with two circles for speakers*/
+    /* 	padding-top: 3vh; */
+    background: var(--black) repeat-x bottom left;
+    background-image:
+            radial-gradient(circle,
+            var(--boxMain) 2vmin,
+            var(--black) 2vmin,
+            var(--black) 3vmin,
+            var(--boxSecond) 3vmin,
+            var(--boxSecond) 7vmin,
+            var(--black) 7vmin,
+            var(--black) 7.5vmin,
+            var(--boxHigh) 7.5vmin,
+            var(--boxHigh) 10vmin,
+            var(--black) 10vmin,
+            var(--black) 11vmin,
+            var(--black) 11vmin);
+    background-size: 33.3% 70%;
+    border: 6px solid var(--black);
+    border-radius: var(--borderRad);
+}
+
+
+.master-controls {
+    display: grid;
+    grid-template-rows: repeat(1, auto);
+    grid-template-columns: repeat(2, 1fr) 12%;
+    /*grid-template-columns: 50px 1fr;*/
+    /*name our grid areas so they are more manipulative later*/
+    grid-template-areas:
+            "file progress";
+    justify-items: center; align-items: center;
+    padding: 0.5vmax;
+    background-color: var(--boxThird);
+    border-bottom: var(--border);
+}
+/* change control grid areas for smaller boom box */
+@media screen and (max-width: 570px) {
+    .master-controls {
+        grid-gap: 10px;
+        grid-template-columns: 16% 1fr 12%;
+        grid-template-areas:
+                "file progress";
+    }
+}
+
+.master-controls input, .master-controls label {display: block;}
+.master-controls input::before, .master-controls input::after {
+    line-height: 5vh; color: var(--black);
+}
+.master-controls input::before {padding-right: 1vw;}
+.master-controls input::after {padding-left: 1vw;}
+
+.control-volume {grid-area: volin;}
+.control-volume::before {content: 'min';}
+.control-volume::after {content: 'max';}
+label[for="volume"] {grid-area: vollab; margin-top: 15px;}
+.control-panner {grid-area: panin;}
+.control-panner::before {content: 'left';}
+.control-panner::after {content: 'right';}
+label[for="panner"] {grid-area: panlab; margin-top: 15px;}
+
+.a-upload {grid-area: file;}
+.center{grid-area: progress;}
+/*label[for="audioSource"] {grid-area: filelab; margin-top: 15px;}*/
+
+
+@media screen and (max-width: 570px) {
+    label[for="volume"], label[for="panner"] {margin-top: 0px;}
+    .control-volume {margin-bottom: 20px;}
+}
+
+.control-power {
+    grid-area: power; align-self: center;
+    width: 40px; height: 40px;
+    border: 3px solid var(--black); border-radius: 20px;
+    cursor: pointer;
+}
+.control-power span {display: none;}
+
+
+ /*tape area ~~~~~~~~~~~~~~~~~~~~~~*/
+.tape {
+    display: grid;
+    grid-template-rows: 20vh 5vh;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: "tape tape tape tape tape"
+    "back rewind play ff next";
+
+    width: 20vw; margin: 0px auto;
+    background: var(--boxMain) no-repeat center center;
+    background-image:
+            radial-gradient(circle at 30%,
+            var(--boxSecond) 2vh,
+            var(--black) 2vh,
+            var(--black) 2.5vh,
+            transparent 2.5vh),
+            radial-gradient(circle at 70%,
+            var(--boxSecond) 2vh,
+            var(--black) 2vh,
+            var(--black) 2.5vh,
+            transparent 2.5vh),
+            linear-gradient(180deg,
+            transparent 6.5vh,
+            var(--black) 6.5vh,
+            var(--black) 7.5vh,
+            var(--boxHigh) 7.5vh,
+            var(--boxHigh) 17.5vh,
+            var(--black) 17.5vh,
+            var(--black) 18.5vh,
+            transparent 18.5vh),
+            radial-gradient(circle at 30%,
+            var(--boxHigh) 5vh,
+            var(--black) 5vh,
+            var(--black) 6vh,
+            transparent 6vh),
+            radial-gradient(circle at 70%,
+            var(--boxHigh) 5vh,
+            var(--black) 5vh,
+            var(--black) 6vh,
+            transparent 6vh);
+    background-size: 100% 100%, 100% 100%, 40% 100%, 100% 100%, 100% 100%;
+    border: var(--boxMain); border-bottom-width: 0px;
+    border-radius: var(--borderRad);
+    max-width: 300px;
+}
+.viz_frame_split {
+    width: 50%;
+    height: 20vh;
+    display: block;
+    float: left;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.viz_frame {
+    width: 50%;
+    height: 40vh;
+    display: block;
+    float: left;
+    text-align: center;
+    margin: 10px auto;
+}
+
+/*.viz_frame {*/
+/*    display: block;*/
+/*    width: auto;*/
+/*    height: 20vh;*/
+/*    margin: 30px auto;*/
+/*}*/
+
+
+@media screen and (max-width: 570px) {
+    .tape {width: 80%; margin-top: 20vh;}
+}
+audio {
+    grid-area: tape;
+}
+/*TODO GIVE BUTTONS CLASSES*/
+[class^="tape-controls"] {
+    border: none;
+}
+[class^="tape-controls"] span {display: none;}
+.tape-controls-play {grid-area: play;}
+
+/* ~~~~~~~~~~~~~~~~ All the crazy range styling */
+input[type=range] {
+    -webkit-appearance: none;
+    width: 30vw;
+    background: transparent;
+}
+/* set min & max for different screen sizes */
+@media screen and (min-width: 1100px) {
+    input[type=range] {width: 270px;}
+}
+@media(max-width: 680px) {
+    input[type=range] {
+        width: 180px;
+    }
+}
+@media(max-width: 380px) {
+    input[type=range] {
+        width: 130px;
+    }
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -1vh;
+    height: 4vh; width: 2vw;
+    border: 0.5vmin solid var(--black);
+    border-radius: var(--borderRad);
+    background-color: var(--boxMain);
+    cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+    height: 4vh; width: 2vw;
+    border: 0.5vmin solid var(--black);
+    border-radius: var(--borderRad);
+    background-color: var(--boxMain);
+    cursor: pointer;
+}
+input[type=range]::-ms-thumb {
+    height: 4vh; width: 2vw;
+    border: 0.5vmin solid var(--black);
+    border-radius: var(--borderRad);
+    background-color: var(--boxMain);
+    cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    height: 2vh;
+    cursor: pointer;
+    background-color: var(--black);
+    border-radius: var(--borderRad);
+}
+input[type=range]::-moz-range-track {
+    height: 2vh;
+    cursor: pointer;
+    background-color: var(--black);
+    border-radius: var(--borderRad);
+}
+input[type=range]::-ms-track {
+    height: 2vh;
+    cursor: pointer;
+    background-color: var(--black);
+    border-radius: var(--borderRad);
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: var(--boxMain);
+}
+

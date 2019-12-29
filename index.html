@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viz Music Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+<h2 center align="center">Music Visualization</h2>
+<h3 center align="center">Please choose your audio file first.</h3>
+
+
+<!--boombox-->
+<div id="boombox" class="viz_frame">
+<!--    <div class="boombox-handle"></div>-->
+
+    <div class="boombox-body">
+
+        <section class="master-controls">
+
+
+            <input class="a-upload" type="file" id="audioSource" onchange="onInputFileChange()">
+
+            <audio controls loop id="audioElement" class="center">
+                Oops, it seems your browser doesn't support audio label.
+            </audio>
+
+
+        </section>
+
+        <section class="tape">
+
+            </button>
+        </section>
+
+    </div><!-- boombox-body -->
+</div>
+
+<div id="d2" class="viz_frame center">
+    <p style="font-style:italic;font-weight: bold">Grid Style</p>
+</div>
+
+<div id="d0" class="viz_frame_split">
+    <span style="font-style:italic;font-weight: bold">Time Domain</span>
+</div>
+<div id="d1" class="viz_frame_split">
+    <span style="font-style:italic;font-weight: bold">Frequency Domain</span>
+</div>
+
+</body>
+<script src="js/bar-time-domain.js"></script>
+<script src="js/bar-frequency-domain.js"></script>
+<script src="js/grid-frequency-domain.js"></script>
+<script src="main.js"></script>
+</html>
